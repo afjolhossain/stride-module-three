@@ -1,7 +1,15 @@
 import { Link } from "react-router-dom";
-
+import Swal from "sweetalert2";
 /* eslint-disable react/prop-types */
 const AllItem = ({ item, CardDelete }) => {
+  const alert = () => {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Are you sure? want to delete",
+    });
+  };
+
   const { name, image_url, description, price, id } = item;
   const handleDelete = async () => {
     await fetch(`http://localhost:3000/sharts/${id}`, {
@@ -11,7 +19,7 @@ const AllItem = ({ item, CardDelete }) => {
       .then((data) => {
         console.log(data);
         CardDelete(id);
-        alert("are you sure?want to delete");
+        alert();
       });
   };
   return (
